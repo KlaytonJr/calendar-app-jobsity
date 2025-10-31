@@ -11,8 +11,16 @@
                 v-for="day in displayedDays"
                 :key="day.date"
                 :dayData="day"
+                @day-selected="selectDay"
             />
         </div>
+
+        <ReminderModal
+            v-if="showModal"
+            :selectedDate="selectedDayDate"
+            :initialReminder="editingReminder"
+            @close="closeModal"
+        />
     </div>
 </template>
 
@@ -23,25 +31,32 @@ import { formatDate, isSameDay } from '@/utils/date';
 import CalendarHeader from './CalendarHeader.vue';
 import CalendarWeekdays from './CalendarWeekdays.vue';
 import CalendarDay from './CalendarDay.vue';
+import ReminderModal from '../modal/ReminderModal.vue';
 
 export default {
   components: {
     CalendarHeader,
     CalendarWeekdays,
     CalendarDay,
+    ReminderModal,
   },
   data() {
     return {
         currentDate: new Date(),
+        showModal: false, 
+        selectedDayDate: null,
+        editingReminder: null,
     };
   },
   computed: {
     currentMonthName() {
       return this.currentDate.toLocaleString('default', { month: 'long' });
     },
+
     currentYear() {
       return this.currentDate.getFullYear();
     },
+
     displayedDays() {
       const year = this.currentDate.getFullYear();
       const month = this.currentDate.getMonth();
@@ -91,7 +106,21 @@ export default {
       return days;
     },
   },
-  methods: {},
+  methods: {
+    selectDay(day) {
+      if (day.isCurrentMonth) {
+        this.selectedDayDate = day.date;
+        this.editingReminder = null;
+        this.showModal = true;
+      }
+    },
+    
+    closeModal() {
+      this.showModal = false;
+      this.editingReminder = null; 
+      this.selectedDayDate = null;
+    },
+  },
 };
 </script>
 

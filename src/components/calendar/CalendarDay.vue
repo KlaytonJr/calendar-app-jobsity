@@ -1,7 +1,7 @@
 <template>
     <div
         :class="['day', { 'current-month': dayData.isCurrentMonth, 'today': dayData.isToday }]"
-        @click="() => {}"
+        @click="$emit('day-selected', dayData)"
     >
         <span class="day-number">{{ dayData.number }}</span>
     </div>
@@ -15,6 +15,7 @@ export default {
       required: true,
     },
   },
+  emits: ['day-selected'],
 };
 </script>
 
