@@ -9,6 +9,7 @@
     @click.stop="$emit('edit-reminder', reminder)"
   >
     <span class="reminder-text">
+        <span class="weather-icon">{{ getWeatherIcon(reminder.weather) }}</span>
         {{ reminder.text }}
     </span>
     <span class="reminder-time">{{ reminder.time }}</span>
@@ -17,6 +18,7 @@
 
 <script>
 import { hexToRgba } from '@/utils/colors'
+import { getWeatherIcon } from '@/utils/weather'
 
 export default {
   name: 'ReminderChip',
@@ -29,6 +31,7 @@ export default {
   emits: ['edit-reminder'],
   methods: {
     hexToRgba,
+    getWeatherIcon
   }
 };
 </script>
@@ -63,5 +66,9 @@ export default {
 .reminder-time {
     flex-shrink: 0; 
     font-weight: 600;
+}
+
+.weather-icon {
+    margin-right: 4px;
 }
 </style>

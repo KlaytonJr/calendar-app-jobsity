@@ -1,5 +1,5 @@
-const OWM_API_URL = 'https://api.openweathermap.org/data/2.5/forecast';
-const API_KEY = process.env.VUE_APP_OWM_API_KEY;
+const OWM_API_URL = 'https://api.openweathermap.org';
+const API_KEY = '3be8473c35cadb12ad4c6e3aecae7d2b';
 
 export async function getCityWeather(city, date) {
     if (!API_KEY || !city || !date) {
@@ -8,7 +8,7 @@ export async function getCityWeather(city, date) {
     }
 
     try {
-        const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`;
+        const geoUrl = `${OWM_API_URL}/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`;
         const geoResponse = await fetch(geoUrl);
         const geoData = await geoResponse.json();
 
@@ -19,7 +19,7 @@ export async function getCityWeather(city, date) {
 
         const { lat, lon } = geoData[0];
         
-        const forecastUrl = `${OWM_API_URL}?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
+        const forecastUrl = `${OWM_API_URL}/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
         const forecastResponse = await fetch(forecastUrl);
         const forecastData = await forecastResponse.json();
 
