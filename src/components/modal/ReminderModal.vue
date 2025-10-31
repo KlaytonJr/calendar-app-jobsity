@@ -52,6 +52,7 @@
 <script>
 import { useRemindersStore } from '@/stores/remindersStore';
 import { mapActions } from 'pinia';
+import { getCityWeather } from '@/services/weather'
 
 export default {
   props: {
@@ -111,9 +112,12 @@ export default {
 
     async submit() {
       if (this.isFormValid) {
+        const weather = await getCityWeather(this.form.city, this.form.date);
+
         const reminderData = {
           ...this.form,
           text: String(this.form.text).substring(0, 30),
+          weather
         };
 
         if (this.isEditMode) {
