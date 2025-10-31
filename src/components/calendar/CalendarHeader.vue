@@ -1,10 +1,10 @@
 <template>
   <div class="header">
-    <button @click="() => {}">
+    <button @click="$emit('navigate', -1)">
         <ArrowLeft size="32" color="white" />
     </button>
     <h2>{{ monthName }} {{ year }}</h2>
-    <button @click="() => {}">
+    <button @click="$emit('navigate', 1)">
         <ArrowRight size="32" color="white" />
     </button>
   </div>

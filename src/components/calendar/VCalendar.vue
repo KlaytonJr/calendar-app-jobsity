@@ -3,6 +3,7 @@
         <CalendarHeader
             :monthName="currentMonthName"
             :year="currentYear"
+            @navigate="handleMonthNavigation"
         />
         <CalendarWeekdays />
 
@@ -108,6 +109,10 @@ export default {
     },
   },
   methods: {
+    handleMonthNavigation(step) {
+      this.currentDate = new Date(this.currentDate.setMonth(this.currentDate.getMonth() + step));
+    },
+
     selectDay(day) {
       if (day.isCurrentMonth) {
         this.selectedDayDate = day.date;
