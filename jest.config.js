@@ -14,9 +14,8 @@ module.exports = {
     'src/**/*.{js,vue}',
     '!src/main.js',
     '!src/App.vue',
-    '!src/stores/remindersStore.js'
   ],
-    testMatch: [
+  testMatch: [
     '<rootDir>/src/**/*.spec.js',
   ],
 };
