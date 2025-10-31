@@ -3,16 +3,19 @@
         <CalendarHeader
             :monthName="currentMonthName"
             :year="currentYear"
-        /> 
+        />
+        <CalendarWeekdays />
     </div>
 </template>
 
 <script>
 import CalendarHeader from './CalendarHeader.vue';
+import CalendarWeekdays from './CalendarWeekdays.vue';
 
 export default {
   components: {
     CalendarHeader,
+    CalendarWeekdays,
   },
   data() {
     return {
