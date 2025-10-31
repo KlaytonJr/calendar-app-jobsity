@@ -1,0 +1,1 @@
+export const hexToRgba = jest.fn((hex, alpha) => `mocked-rgba(${hex}, ${alpha})`);

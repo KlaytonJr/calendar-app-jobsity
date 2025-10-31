@@ -1,0 +1,1 @@
+export const getWeatherIcon = jest.fn(weather => `[${weather.toUpperCase()}_ICON]`);
