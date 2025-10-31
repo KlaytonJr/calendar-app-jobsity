@@ -56,14 +56,18 @@ export default {
 .day {
   border: 1px solid #eee;
   padding: 10px;
+  width: 100%; 
+  height: 100%; 
   min-height: 80px;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
   align-items: flex-start;
   position: relative;
   background-color: #fcfcfc;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  overflow-y: hidden;
 }
 
 .day:hover {
@@ -71,6 +75,7 @@ export default {
 }
 
 .day-number {
+  flex-shrink: 0;
   font-size: 1.2em;
   font-weight: bold;
   margin-bottom: 5px;
@@ -99,6 +104,19 @@ export default {
 
 .reminders {
   width: 100%;
-  margin-top: 5px;
+  padding-top: 5px;
+  flex-grow: 1; 
+  overflow-y: auto;
+  max-height: 100%; 
+  min-height: 0;
+}
+
+.reminders::-webkit-scrollbar {
+  width: 4px;
+}
+
+.reminders::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
 }
 </style>

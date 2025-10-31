@@ -8,13 +8,13 @@
         <CalendarWeekdays />
 
         <div class="days-grid">
-            <CalendarDay
-                v-for="day in displayedDays"
-                :key="day.date"
-                :dayData="day"
-                @day-selected="selectDay"
-                @edit-reminder="openEditModal"
-            />
+          <CalendarDay
+            v-for="day in displayedDays"
+            :key="day.date"
+            :dayData="day"
+            @day-selected="selectDay"
+            @edit-reminder="openEditModal"
+          />
         </div>
 
         <ReminderModal
@@ -138,7 +138,10 @@ export default {
 
 <style scoped>
 .calendar {
-  max-width: 900px;
+  max-width: 1200px;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
   margin: 20px auto;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -147,8 +150,10 @@ export default {
 }
 
 .days-grid {
+  flex-grow: 1;
+  height: 85%;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-auto-rows: minmax(100px, auto);
+  grid-template-rows: repeat(6, 1fr);
 }
 </style>
