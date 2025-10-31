@@ -4,18 +4,51 @@
         @click="$emit('day-selected', dayData)"
     >
         <span class="day-number">{{ dayData.number }}</span>
+
+        <div class="reminders">
+          <ReminderChip
+            v-for="reminder in getRemindersForDay(dayData.date)"
+            :key="reminder.id"
+            :reminder="reminder"
+            @edit-reminder="(v) => $emit('edit-reminder', v)"
+          />
+        </div>
     </div>
 </template>
 
 <script>
+import { useRemindersStore } from '@/stores/remindersStore';
+import { mapState } from 'pinia';
+
+// Components
+import ReminderChip from '../reminder/ReminderChip.vue';
+
 export default {
+  components: { ReminderChip },
   props: {
     dayData: {
       type: Object,
       required: true,
     },
   },
-  emits: ['day-selected'],
+  emits: ['day-selected', 'edit-reminder'],
+  computed: {
+    ...mapState(useRemindersStore, ['reminders']),
+  },
+  methods: {
+    sortReminders(reminders) {
+      return [...reminders].sort((a, b) => {
+        if (a.time < b.time) return -1;
+        if (a.time > b.time) return 1;
+        return 0;
+      });
+    },
+
+    getRemindersForDay(date) {
+      const dailyReminders = this.reminders.filter(reminder => reminder.date === date);
+      return this.sortReminders(dailyReminders);
+    },
+  }
 };
 </script>
 
@@ -62,5 +95,10 @@ export default {
 
 .today .day-number {
   color: #1976d2;
+}
+
+.reminders {
+  width: 100%;
+  margin-top: 5px;
 }
 </style>

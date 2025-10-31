@@ -12,6 +12,7 @@
                 :key="day.date"
                 :dayData="day"
                 @day-selected="selectDay"
+                @edit-reminder="openEditModal"
             />
         </div>
 
@@ -113,6 +114,12 @@ export default {
         this.editingReminder = null;
         this.showModal = true;
       }
+    },
+
+    openEditModal(reminder) {
+      this.selectedDayDate = null; 
+      this.editingReminder = reminder;
+      this.showModal = true;
     },
     
     closeModal() {
