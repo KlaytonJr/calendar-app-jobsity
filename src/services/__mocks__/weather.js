@@ -1,0 +1,1 @@
+export const getCityWeather = jest.fn(() => Promise.resolve('Clear'));

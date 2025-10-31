@@ -41,6 +41,7 @@
           @click="submit"
           :disabled="!isFormValid" 
           class="button-base button-save"
+          data-testid="add-button"
         >
           {{ isEditMode ? 'Save Edits' : 'Add' }}
         </button>
