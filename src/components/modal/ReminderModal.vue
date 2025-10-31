@@ -33,12 +33,12 @@
 
       <div class="modal-footer">
         
-        <button v-if="isEditMode" @click="() => {}" class="button-base button-delete">Delete</button>
+        <button v-if="isEditMode" @click="deleteItem" class="button-base button-delete">Delete</button>
 
         <button @click="$emit('close')" class="button-base button-cancel">Cancel</button>
         
         <button 
-          @click="() => {}" 
+          @click="submit"
           :disabled="!isFormValid" 
           class="button-base button-save"
         >
@@ -50,6 +50,9 @@
 </template>
 
 <script>
+import { useRemindersStore } from '@/stores/remindersStore';
+import { mapActions } from 'pinia';
+
 export default {
   props: {
     selectedDate: {
@@ -104,6 +107,30 @@ export default {
     }
   },
   methods: {
+    ...mapActions(useRemindersStore, ['addReminder', 'updateReminder', 'deleteReminder']),
+
+    async submit() {
+      if (this.isFormValid) {
+        const reminderData = {
+          ...this.form,
+          text: String(this.form.text).substring(0, 30),
+        };
+
+        if (this.isEditMode) {
+          this.updateReminder(reminderData);
+        } else {
+            this.addReminder(reminderData);
+        }
+        this.$emit('close');
+      }
+    },
+
+    deleteItem() {
+        if (confirm('Are you sure you want to delete this reminder?')) {
+            this.deleteReminder(this.form.id);
+            this.$emit('close');
+        }
+    }
   },
 };
 </script>
