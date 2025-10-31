@@ -62,3 +62,85 @@ describe('Reminders Store', () => {
     expect(store.reminders[0].time).toBe(time);
   });
 });
+
+describe('Reminders Store - Update and Delete', () => {
+  let store;
+  const initialReminder = { 
+    id: MOCK_TIME + 1,
+    date: '2025-12-01', 
+    time: '09:00', 
+    city: 'London', 
+    text: 'Original Plan', 
+    color: '#ff0000', 
+    weather: 'Rain' 
+  };
+
+  beforeEach(() => {
+    setActivePinia(createPinia());
+    store = useRemindersStore();
+    store.reminders.push(initialReminder);
+  });
+
+  it('should successfully update an existing reminder', () => {
+    const updatedText = 'New Project Details';
+    const updatedTime = '16:00';
+    const updatedCity = 'Manchester';
+
+    const updatedReminder = {
+      ...initialReminder,
+      text: updatedText,
+      time: updatedTime,
+      city: updatedCity,
+    };
+
+    store.updateReminder(updatedReminder);
+
+    expect(store.reminders.length).toBe(1);
+    expect(store.reminders[0].text).toBe(updatedText);
+    expect(store.reminders[0].time).toBe(updatedTime);
+    expect(store.reminders[0].city).toBe(updatedCity);
+    expect(store.reminders[0].id).toBe(initialReminder.id);
+  });
+
+  it('should trim the updated text to a maximum of 30 characters', () => {
+    const longText = 'This new update text exceeds the max character limit.';
+    const expectedText = 'This new update text exceeds t';
+
+    const updatedReminder = {
+      ...initialReminder,
+      text: longText,
+    };
+
+    store.updateReminder(updatedReminder);
+
+    expect(store.reminders[0].text.length).toBe(30);
+    expect(store.reminders[0].text).toBe(expectedText);
+  });
+
+  it('should not update if the reminder ID is not found', () => {
+    const nonExistentId = 9999;
+    const originalText = store.reminders[0].text;
+    
+    store.updateReminder({ id: nonExistentId, text: 'Attempted Change' });
+
+    expect(store.reminders.length).toBe(1);
+    expect(store.reminders[0].text).toBe(originalText);
+  });
+
+  it('should successfully delete an existing reminder by ID', () => {
+    expect(store.reminders.length).toBe(1);
+    
+    store.deleteReminder(initialReminder.id);
+
+    expect(store.reminders.length).toBe(0);
+  });
+
+  it('should do nothing if the ID to delete is not found', () => {
+    expect(store.reminders.length).toBe(1);
+
+    store.deleteReminder(9999);
+
+    expect(store.reminders.length).toBe(1); 
+    expect(store.reminders[0].id).toBe(initialReminder.id);
+  });
+});
