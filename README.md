@@ -43,6 +43,46 @@ This application integrates with the **OpenWeatherMap 5-Day / 3-Hour Forecast AP
 * **API Key:** The API Key is currently hardcoded in the source code for immediate testing and evaluation. In a production environment, this key would be securely managed.
 * **Data Limitation:** Due to the limitations of the free API plan, the forecast data is only available for the **current day and the next 4 to 5 days** (in 3-hour intervals). Reminders set far in the future may display a 'N/A' weather icon.
 
+## 📘 Guide: How to Use the Calendar
+
+This application offers complete CRUD (Create, Read, Update, Delete) functionality for reminders, integrated with month navigation and weather forecasting.
+
+### 1. Navigating the Calendar
+
+- **Change Month:** Use the left (<) and right (>) arrow buttons in the blue header to move between months.
+
+### 2. Creating a New Reminder
+
+1. **Select a Day:** Click on any day cell within the current month. The "Add Reminder" modal will appear.
+
+2. **Enter Details:**
+
+    * **Label:** Type your reminder text (maximum 30 characters).
+
+    * **Date & Hour:** The date is pre-filled. Adjust the time as needed.
+
+    * **City:** Enter the target city (e.g., "New York"). This is used for the weather forecast.
+
+    * **Color:** Select a color to categorize your reminder.
+
+3. **Save:** Click the "Add" button. The application will asynchronously fetch the weather for the specified date and city, and display the reminder chip on the calendar.
+
+### 3. Editing and Deleting Reminders
+
+1. **Open Edit Modal:** Click directly on the colored reminder chip displayed on the calendar day. The modal will switch to "Edit Reminder" mode, pre-populated with the reminder's current data.
+
+2. **Modify:** Change the text, date, time, city, or color.
+
+3. **Save Changes:** Click the "Save Edits" button to apply the updates (this also re-fetches the weather if the city or date changed).
+
+4. **Delete:** Click the "Delete" button to permanently remove the reminder.
+
+### 4. Viewing Reminders
+
+- **Weather Icon:** The small icon next to the reminder label displays the fetched forecast (e.g., ☀️ for Clear, 🌧️ for Rain).
+
+- **Scrolling:** If a day has too many reminders, a scrollbar will appear inside the day cell, keeping the calendar layout consistent.
+
 ## 🧪 Testing and Quality Assurance
 
 Unit tests are implemented using **Jest** and **Vue Test Utils** to ensure the reliability of the core logic and component behavior.
