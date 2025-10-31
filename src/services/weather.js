@@ -1,0 +1,43 @@
+const OWM_API_URL = 'https://api.openweathermap.org/data/2.5/forecast';
+const API_KEY = process.env.VUE_APP_OWM_API_KEY;
+
+export async function getCityWeather(city, date) {
+    if (!API_KEY || !city || !date) {
+        console.error("API Key, city, or date is missing.");
+        return 'N/A';
+    }
+
+    try {
+        const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`;
+        const geoResponse = await fetch(geoUrl);
+        const geoData = await geoResponse.json();
+
+        if (geoData.length === 0) {
+            console.warn(`City not found: ${city}`);
+            return 'N/A';
+        }
+
+        const { lat, lon } = geoData[0];
+        
+        const forecastUrl = `${OWM_API_URL}?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
+        const forecastResponse = await fetch(forecastUrl);
+        const forecastData = await forecastResponse.json();
+
+        if (forecastData.list) {
+            const targetDate = date.substring(0, 10);
+
+            const dailyForecast = forecastData.list.find(item => {
+                return item.dt_txt.startsWith(targetDate);
+            });
+            
+            if (dailyForecast && dailyForecast.weather && dailyForecast.weather.length > 0) {
+                return dailyForecast.weather[0].main; 
+            }
+        }
+
+        return 'N/A';
+    } catch (error) {
+        console.error("Error fetching weather:", error);
+        return 'Erro';
+    }
+}
