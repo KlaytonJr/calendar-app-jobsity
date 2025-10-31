@@ -4179,6 +4179,11 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
+lucide-vue-next@^0.548.0:
+  version "0.548.0"
+  resolved "https://registry.npmjs.org/lucide-vue-next/-/lucide-vue-next-0.548.0.tgz"
+  integrity sha512-VtL3HkoPOhrhBkJdLWm6JY1kmCetsri1lvoaenem5PQagO2cjR1sNENNnuLJHzl/l0IcFg8RKJyiHt2GZtvj2A==
+
 magic-string@^0.30.19:
   version "0.30.21"
   resolved "https://registry.npmjs.org/magic-string/-/magic-string-0.30.21.tgz"
@@ -6066,7 +6071,7 @@ vue-template-es2015-compiler@^1.9.0:
   resolved "https://registry.npmjs.org/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
 
-vue@*, "vue@^2 || ^3.2.13", "vue@^2.7.0 || ^3.5.11", vue@^3.2.13, vue@3.5.22:
+vue@*, "vue@^2 || ^3.2.13", "vue@^2.7.0 || ^3.5.11", vue@^3.2.13, vue@>=3.0.1, vue@3.5.22:
   version "3.5.22"
   resolved "https://registry.npmjs.org/vue/-/vue-3.5.22.tgz"
   integrity sha512-toaZjQ3a/G/mYaLSbV+QsQhIdMo9x5rrqIpYRObsJ6T/J+RyCSFwN2LHNVH9v8uIcljDNa3QzPVdv3Y6b9hAJQ==
