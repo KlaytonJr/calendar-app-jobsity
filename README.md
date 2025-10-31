@@ -2,7 +2,7 @@
 
 This project is a single-page calendar application built using Vue.js 3 and Pinia for state management. It allows users to create, edit, and manage personalized reminders, featuring advanced UI/UX requirements like dynamic styling and integration with an external Weather API.
 
-(calendar-animation-gif)[https://github.com/KlaytonJr/calendar-app-jobsity/blob/main/doc-content/calendar-animation.gif?raw=true]
+[calendar-animation-gif](https://github.com/KlaytonJr/calendar-app-jobsity/blob/main/doc-content/calendar-animation.gif?raw=true)
 
 ## 🚀 Technologies Used
 
